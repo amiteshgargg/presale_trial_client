@@ -228,8 +228,15 @@ const Banner = () => {
         } catch (err) {
           console.log(JSON.stringify(err))
           if (err.name == "ContractFunctionExecutionError") {
+            if(err.cause.details.includes("insufficient funds")) {
+              alert("Insufficient Funds in Account");
+            } else if(alert.cause.reason){
+              alert(err.cause.reason);
+            } else {
+              alert("Please Try Again");
+            }
             // alert(err.message.split(':')[1].split("Contract")[0]);
-            alert(err.cause.reason)
+            
           }
         }
       } else {
