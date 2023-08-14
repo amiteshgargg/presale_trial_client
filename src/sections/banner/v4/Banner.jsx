@@ -226,7 +226,7 @@ const Banner = () => {
           console.log(config)
           const { hash } = await writeContract(config);
         } catch (err) {
-          console.log(err)
+          console.log(JSON.stringify(err))
           if (err.name == "ContractFunctionExecutionError") {
             // alert(err.message.split(':')[1].split("Contract")[0]);
             alert(err.cause.reason)
