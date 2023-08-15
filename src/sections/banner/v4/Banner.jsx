@@ -92,12 +92,12 @@ const Banner = () => {
   const { data: hardCapData } = useContractRead({ ...hardCapCall });
   const { data: totalFundData } = useContractRead({ ...totalFundCall });
 
-  const { config } = usePrepareContractWrite({
-    ...buyTokenCall,
-    value: parseEther(paymentPrice.toString()),
-    args: [buyAmount],
-  });
-  const { write } = useContractWrite(config);
+  // const { config } = usePrepareContractWrite({
+  //   ...buyTokenCall,
+  //   value: parseEther(paymentPrice.toString()),
+  //   args: [buyAmount],
+  // });
+  // const { write } = useContractWrite(config);
 
   useEffect(() => {
     if (isBuyNow) {
@@ -227,7 +227,7 @@ const Banner = () => {
         } catch (err) {
           console.log(JSON.stringify(err));
           if (err.name == "ContractFunctionExecutionError") {
-            if(err.cause.details.includes("insufficient funds")) {
+            if(err.cause.details && err.cause.details.includes("insufficient funds")) {
               alert("Insufficient Funds in Account");
             } else if(alert.cause.reason){
               alert(err.cause.reason);
