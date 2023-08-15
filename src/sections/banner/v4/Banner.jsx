@@ -222,14 +222,13 @@ const Banner = () => {
             value: parseEther(paymentPrice.toString()),
             args: [buyAmount],
           });
-          console.log(config)
           const { hash } = await writeContract(config);
         } catch (err) {
           console.log(JSON.stringify(err));
           if (err.name == "ContractFunctionExecutionError") {
             if(err.cause.details && err.cause.details.includes("insufficient funds")) {
               alert("Insufficient Funds in Account");
-            } else if(alert.cause.reason){
+            } else if(err.cause.reason){
               alert(err.cause.reason);
             } else {
               alert("Please Try Again");
