@@ -217,7 +217,6 @@ const Banner = () => {
     } else {
       if (paymentAmount != "" && paymentAmount >= currentPrice) {
         try {
-          console.log("here")
           const config = await prepareWriteContract({
             ...buyTokenCall,
             value: parseEther(paymentPrice.toString()),
@@ -226,7 +225,7 @@ const Banner = () => {
           console.log(config)
           const { hash } = await writeContract(config);
         } catch (err) {
-          console.log(JSON.stringify(err))
+          console.log(err.cause.details)
           if (err.name == "ContractFunctionExecutionError") {
             if(err.cause.details.includes("insufficient funds")) {
               alert("Insufficient Funds in Account");
