@@ -225,7 +225,7 @@ const Banner = () => {
           console.log(config)
           const { hash } = await writeContract(config);
         } catch (err) {
-          console.log(err.cause.details)
+          console.log(JSON.stringify(err));
           if (err.name == "ContractFunctionExecutionError") {
             if(err.cause.details.includes("insufficient funds")) {
               alert("Insufficient Funds in Account");
